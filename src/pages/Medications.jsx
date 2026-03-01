@@ -163,7 +163,7 @@ function MedForm({ formData, setFormData, onSubmit, onCancel, isSubmitting, subm
       </div>
 
       {/* Dates */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 10 }}>
         {[{ key: 'startDate', label: 'Start Date' }, { key: 'endDate', label: 'End Date' }, { key: 'expiryDate', label: 'Expiry Date' }].map(({ key, label }) => (
           <div key={key}>
             <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-2)', marginBottom: 6 }}>{label}</label>

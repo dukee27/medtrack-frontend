@@ -47,7 +47,7 @@ function SectionCard({ title, icon: Icon, iconColor, children }) {
       background: 'var(--bg-card)',
       border: '1.5px solid var(--border)',
       borderRadius: 'var(--radius)',
-      padding: '24px 28px',
+      padding: '20px',
       boxShadow: 'var(--shadow)',
       animation: 'fadeInUp 0.35s ease both',
     }}>
@@ -115,7 +115,7 @@ export default function Settings() {
   }
 
   return (
-    <div style={{ padding: '40px', maxWidth: 720 }}>
+    <div style={{ maxWidth: 720, width: '100%', boxSizing: 'border-box' }}>
       <div style={{ marginBottom: 36 }}>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 700, letterSpacing: '-0.5px', color: 'var(--text)' }}>
           Settings
