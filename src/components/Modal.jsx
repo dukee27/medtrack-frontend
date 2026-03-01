@@ -20,28 +20,25 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
   const maxWidths = { sm: 400, md: 520, lg: 680, xl: 820 }
 
   return (
-    <div
-      onClick={e => { if (e.target === e.currentTarget) onClose() }}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
+    <>
+      {/* Fixed full-screen backdrop — always covers everything */}
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 9998,
         background: 'rgba(0,0,0,0.6)',
         backdropFilter: 'blur(4px)',
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        padding: '16px',
-      }}
-    >
-      {/* This wrapper is what centers the card, and the overlay scrolls */}
+      }} onClick={onClose} />
+
+      {/* Scrollable layer on top of backdrop */}
       <div
+        onClick={e => { if (e.target === e.currentTarget) onClose() }}
         style={{
-          minHeight: '100%',
+          position: 'fixed', inset: 0, zIndex: 9999,
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          padding: '16px',
           display: 'flex',
-          alignItems: 'flex-start',
           justifyContent: 'center',
-          paddingTop: 8,
-          paddingBottom: 8,
+          alignItems: 'flex-start',
         }}
       >
         <div
@@ -52,15 +49,15 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
             borderRadius: 'var(--radius)',
             width: '100%',
             maxWidth: maxWidths[size],
-            boxShadow: '0 32px 80px rgba(0,0,0,0.4)',
+            marginTop: 8,
+            marginBottom: 8,
+            boxShadow: '0 32px 80px rgba(0,0,0,0.5)',
             animation: 'modalIn 0.2s ease',
           }}
         >
-          {/* Header — always visible at top of card */}
+          {/* Header */}
           <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '16px 20px',
             borderBottom: '1.5px solid var(--border)',
             borderRadius: 'var(--radius) var(--radius) 0 0',
@@ -83,7 +80,7 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
             >×</button>
           </div>
 
-          {/* Body — no overflow, grows naturally */}
+          {/* Body */}
           <div style={{ padding: '20px' }}>
             {children}
           </div>
@@ -96,6 +93,6 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
           to   { opacity: 1; transform: scale(1)    translateY(0);   }
         }
       `}</style>
-    </div>
+    </>
   )
 }
