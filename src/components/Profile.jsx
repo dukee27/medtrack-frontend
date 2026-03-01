@@ -11,7 +11,7 @@ function SectionCard({ title, icon: Icon, iconColor, children }) {
       background: 'var(--bg-card)',
       border: '1.5px solid var(--border)',
       borderRadius: 'var(--radius)',
-      padding: '24px 28px',
+      padding: '20px',
       boxShadow: 'var(--shadow)',
       animation: 'fadeInUp 0.35s ease both',
     }}>
@@ -282,7 +282,7 @@ export default function Profile() {
 
         {/* Account Details */}
         <SectionCard title="Account Details" icon={BadgeCheck} iconColor="var(--info)">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12 }}>
             {[
               { label: 'Email', value: profile?.email || user?.email || '—' },
               { label: 'Member Since', value: profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '—' },

@@ -295,29 +295,34 @@ export default function Layout({ children }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
             {!isMobile && <PatientSwitcher />}
-            <div style={{ position: 'relative' }}>
+
+            {/* Bell */}
+            <div style={{ position: 'relative', width: 38, height: 38, flexShrink: 0 }}>
               <button onClick={() => navigate('/notifications')} style={{
                 width: 38, height: 38, borderRadius: '50%',
                 border: `1px solid ${dividerColor}`,
                 background: isDark ? '#26221E' : '#F5F0EA',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', color: textMuted,
+                cursor: 'pointer', color: textMuted, padding: 0,
               }}>
                 <Bell size={17} />
-                {unreadCount > 0 && (
-                  <span style={{
-                    position: 'absolute', top: -2, right: -2,
-                    width: 17, height: 17, borderRadius: '50%',
-                    background: 'var(--danger)', color: '#fff',
-                    fontSize: 9, fontWeight: 700,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    border: `2px solid ${isDark ? '#1A1714' : '#fff'}`,
-                  }}>
-                    {unreadCount > 9 ? '9+' : unreadCount}
-                  </span>
-                )}
               </button>
+              {unreadCount > 0 && (
+                <span style={{
+                  position: 'absolute', top: 0, right: 0,
+                  width: 16, height: 16, borderRadius: '50%',
+                  background: 'var(--danger)', color: '#fff',
+                  fontSize: 9, fontWeight: 700,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  border: `2px solid ${isDark ? '#1A1714' : '#fff'}`,
+                  pointerEvents: 'none',
+                }}>
+                  {unreadCount > 9 ? '9+' : unreadCount}
+                </span>
+              )}
             </div>
+
+            {/* Avatar */}
             <div onClick={() => navigate('/profile')} style={{
               width: 36, height: 36, borderRadius: '50%',
               background: 'var(--accent)',
