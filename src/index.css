@@ -228,15 +228,7 @@ button, input, select, textarea { font-family: var(--font-body); }
     -webkit-overflow-scrolling: touch;
   }
 
-  /* ── Modals ── */
-  [role="dialog"],
-  .modal-content {
-    width: calc(100vw - 32px) !important;
-    max-width: 100% !important;
-    margin: 16px !important;
-    max-height: calc(100vh - 32px) !important;
-    overflow-y: auto !important;
-  }
+  /* ── Modals — handled entirely by Modal.jsx, no CSS overrides needed ── */
 
   /* ── Dashboard: today's doses card layout ── */
   .med-card .flex.items-center.justify-between {

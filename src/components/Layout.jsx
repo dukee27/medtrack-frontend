@@ -173,7 +173,7 @@ export default function Layout({ children }) {
         </div>
       )}
 
-      <nav style={{ flex: 1, padding: '0 8px', overflowY: 'auto', overflowX: 'hidden' }}>
+      <nav style={{ flex: 1, padding: '0 8px', overflowY: 'auto', overflowX: 'clip' }}>
         {menuItems.map(item => <NavItem key={item.path} {...item} />)}
       </nav>
 
@@ -226,7 +226,7 @@ export default function Layout({ children }) {
             background: sidebarBg, borderRight: `1px solid ${sidebarBorder}`,
             height: '100vh', position: 'sticky', top: 0,
             display: 'flex', flexDirection: 'column',
-            zIndex: 50, flexShrink: 0, overflow: 'hidden',
+            zIndex: 50, flexShrink: 0, overflow: 'visible',
             boxShadow: isDark ? 'none' : '2px 0 12px rgba(0,0,0,0.04)',
           }}
         >
