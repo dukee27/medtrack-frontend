@@ -22,8 +22,9 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.45)',
         backdropFilter: 'blur(4px)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: 24, animation: 'fadeIn 0.18s ease',
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+        padding: '16px', animation: 'fadeIn 0.18s ease',
+        overflowY: 'auto',
       }}
     >
       <div style={{
@@ -32,7 +33,7 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
         borderRadius: 'var(--radius)',
         width: '100%',
         maxWidth: maxWidths[size],
-        maxHeight: '90vh',
+        maxHeight: 'calc(100dvh - 32px)',
         overflow: 'auto',
         animation: 'fadeInUp 0.22s ease',
         boxShadow: 'var(--shadow-lg)',

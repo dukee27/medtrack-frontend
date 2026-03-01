@@ -160,3 +160,113 @@ button, input, select, textarea { font-family: var(--font-body); }
 [data-theme="dark"] textarea::placeholder { color: var(--text-3) !important; }
 [data-theme="dark"] option { background: var(--bg-card-2); color: var(--text); }
 [data-theme="dark"] .med-card { background: var(--bg-card) !important; border-color: var(--border) !important; }
+/* ══════════════════════════════════════════════
+   MOBILE RESPONSIVE — Full overhaul
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Layout ── */
+  .page-container {
+    padding: 16px !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Hero banner ── */
+  .hero-banner {
+    padding: 24px 20px !important;
+    margin-bottom: 20px !important;
+  }
+  .hero-banner h1 {
+    font-size: 22px !important;
+  }
+  .hero-banner p {
+    font-size: 14px !important;
+  }
+
+  /* ── Cards ── */
+  .med-card {
+    padding: 16px !important;
+  }
+
+  /* ── Tailwind grid overrides ── */
+  .grid-cols-2,
+  .sm\:grid-cols-2,
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .lg\:grid-cols-3,
+  .md\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+  .lg\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+
+  /* ── Typography ── */
+  .text-3xl, .text-4xl {
+    font-size: 1.5rem !important;
+  }
+  .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  /* ── Buttons ── */
+  button {
+    white-space: nowrap;
+  }
+
+  /* ── Flex rows that should wrap on mobile ── */
+  .flex-row-mobile-wrap {
+    flex-direction: column !important;
+  }
+
+  /* ── Tables — make scrollable ── */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── Modals ── */
+  [role="dialog"],
+  .modal-content {
+    width: calc(100vw - 32px) !important;
+    max-width: 100% !important;
+    margin: 16px !important;
+    max-height: calc(100vh - 32px) !important;
+    overflow-y: auto !important;
+  }
+
+  /* ── Dashboard: today's doses card layout ── */
+  .med-card .flex.items-center.justify-between {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ── Space reductions ── */
+  .space-y-8 > * + * { margin-top: 20px !important; }
+  .space-y-6 > * + * { margin-top: 16px !important; }
+  .space-y-4 > * + * { margin-top: 12px !important; }
+
+  /* ── Padding reductions ── */
+  .p-8 { padding: 16px !important; }
+  .p-6 { padding: 14px !important; }
+  .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+  .py-8 { padding-top: 16px !important; padding-bottom: 16px !important; }
+  .gap-8 { gap: 16px !important; }
+  .gap-6 { gap: 12px !important; }
+}
+
+/* ── Very small phones (iPhone SE, etc.) ── */
+@media (max-width: 380px) {
+  .page-container {
+    padding: 12px !important;
+  }
+  .med-card {
+    padding: 12px !important;
+  }
+  .hero-banner h1 {
+    font-size: 18px !important;
+  }
+}
