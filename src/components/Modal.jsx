@@ -21,32 +21,35 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
 
   return (
     <>
-      {/* Layer 1: Fixed full-screen dark backdrop — never moves */}
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 9000,
-        background: 'rgba(0,0,0,0.65)',
-        backdropFilter: 'blur(4px)',
-      }} onClick={onClose} />
+      {/* Layer 1: Fixed full-screen backdrop — never scrolls, always covers everything */}
+      <div
+        style={{
+          position: 'fixed', inset: 0, zIndex: 9000,
+          background: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(5px)',
+          WebkitBackdropFilter: 'blur(5px)',
+        }}
+        onClick={onClose}
+      />
 
-      {/* Layer 2: Fixed full-screen scroll container */}
+      {/* Layer 2: Scroll container — pointer-events:none so the void below the card
+          passes clicks through to the backdrop above, which closes the modal */}
       <div
         style={{
           position: 'fixed', inset: 0, zIndex: 9001,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
-          padding: '24px 16px',
-          // pointer-events only on the card, not the void below
+          padding: '20px 16px 40px',
           pointerEvents: 'none',
         }}
       >
-        {/* Center wrapper */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-start',
           minHeight: '100%',
         }}>
-          {/* The actual modal card */}
+          {/* Card — re-enables pointer events */}
           <div
             onClick={e => e.stopPropagation()}
             style={{
@@ -56,17 +59,18 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
               borderRadius: 'var(--radius)',
               width: '100%',
               maxWidth: maxWidths[size],
-              boxShadow: '0 32px 80px rgba(0,0,0,0.5)',
-              animation: 'modalIn 0.2s ease',
-              marginBottom: 24,
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+              animation: 'modalSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+              marginBottom: 20,
             }}
           >
             {/* Header */}
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: '16px 20px',
-              borderBottom: '1.5px solid var(--border)',
+              padding: '18px 22px',
+              borderBottom: '1px solid var(--border)',
               borderRadius: 'var(--radius) var(--radius) 0 0',
+              background: 'var(--bg-card)',
             }}>
               <h2 style={{
                 fontFamily: 'var(--font-display)',
@@ -76,18 +80,20 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
               <button
                 onClick={onClose}
                 style={{
-                  background: 'var(--bg-hover)', border: 'none', color: 'var(--text-2)',
-                  cursor: 'pointer', width: 32, height: 32, borderRadius: '50%',
+                  background: 'var(--bg-hover)', border: 'none',
+                  color: 'var(--text-2)', cursor: 'pointer',
+                  width: 30, height: 30, borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 20, flexShrink: 0,
+                  fontSize: 18, flexShrink: 0,
+                  transition: 'background 0.15s, color 0.15s',
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = 'var(--border)'}
-                onMouseLeave={e => e.currentTarget.style.background = 'var(--bg-hover)'}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--danger-dim)'; e.currentTarget.style.color = 'var(--danger)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-hover)'; e.currentTarget.style.color = 'var(--text-2)' }}
               >×</button>
             </div>
 
-            {/* Body */}
-            <div style={{ padding: '20px' }}>
+            {/* Body — no maxHeight, no overflow, grows naturally with content */}
+            <div style={{ padding: '22px' }}>
               {children}
             </div>
           </div>
@@ -95,9 +101,9 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
       </div>
 
       <style>{`
-        @keyframes modalIn {
-          from { opacity: 0; transform: scale(0.97) translateY(8px); }
-          to   { opacity: 1; transform: scale(1)    translateY(0);   }
+        @keyframes modalSlideIn {
+          from { opacity: 0; transform: translateY(10px) scale(0.98); }
+          to   { opacity: 1; transform: translateY(0)    scale(1);    }
         }
       `}</style>
     </>
