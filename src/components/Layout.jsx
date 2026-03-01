@@ -153,7 +153,7 @@ export default function Layout({ children }) {
         </div>
       )}
 
-      <div style={{ padding: '20px 16px 12px', display: 'flex', alignItems: 'center', gap: 10, overflow: 'hidden' }}>
+      <div style={{ padding: '20px 16px 12px', display: 'flex', alignItems: 'center', gap: 10, overflow: 'hidden', justifyContent: (!isMobile && isCollapsed) ? 'center' : 'flex-start' }}>
         <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px var(--accent-glow)' }}>
           <ShieldCheck size={18} color="#fff" />
         </div>
