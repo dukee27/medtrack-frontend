@@ -1,0 +1,162 @@
+/* ====================================================
+   MedTrack Design System
+   ==================================================== */
+
+/* Google Fonts must come before @tailwind in PostCSS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── LIGHT THEME ──────────────────────────────────── */
+:root {
+  --bg: #F9F7F4;
+  --bg-card: #FFFFFF;
+  --bg-card-2: #FAF7F2;
+  --bg-hover: #F0EBE3;
+  --border: #E6DFD5;
+  --border-light: #D6CEC3;
+
+  --accent: #2A7A58;
+  --accent-2: #40916C;
+  --accent-dim: rgba(42,122,88,0.08);
+  --accent-glow: rgba(42,122,88,0.2);
+
+  --success: #2A7A58;
+  --success-dim: rgba(42,122,88,0.1);
+  --warning: #C76A00;
+  --warning-dim: rgba(199,106,0,0.1);
+  --danger: #CB4335;
+  --danger-dim: rgba(203,67,53,0.1);
+  --info: #1F72A3;
+  --info-dim: rgba(31,114,163,0.1);
+
+  --text: #221F1D;
+  --text-2: #5D5752;
+  --text-3: #A19A94;
+  --text-inv: #FFFFFF;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.04);
+  --shadow-md: 0 8px 32px rgba(42,122,88,0.08);
+}
+
+/* ── DARK THEME ───────────────────────────────────── */
+[data-theme="dark"] {
+  --bg: #18150F;
+  --bg-card: #221E17;
+  --bg-card-2: #2A2519;
+  --bg-hover: #332C20;
+  --border: #3A3325;
+  --border-light: #4A4232;
+
+  --accent: #52B788;
+  --accent-2: #6DCB9E;
+  --accent-dim: rgba(82,183,136,0.12);
+  --accent-glow: rgba(82,183,136,0.25);
+
+  --success: #52B788;
+  --success-dim: rgba(82,183,136,0.12);
+  --warning: #F4A261;
+  --warning-dim: rgba(244,162,97,0.12);
+  --danger: #E57373;
+  --danger-dim: rgba(229,115,115,0.12);
+  --info: #64B5F6;
+  --info-dim: rgba(100,181,246,0.12);
+
+  --text: #F5EFE6;
+  --text-2: #B8AFA6;
+  --text-3: #6E6560;
+  --text-inv: #18150F;
+}
+
+/* ── GLOBAL ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; }
+button, input, select, textarea { font-family: var(--font-body); }
+
+/* ── LAYOUT ───────────────────────────────────────── */
+.app-wrapper { display: flex; height: 100vh; width: 100vw; }
+.main-content { flex: 1; overflow-y: auto; }
+.page-container { max-width: 1200px; margin: 0 auto; padding: 40px 32px; width: 100%; }
+@media (max-width: 768px) { .page-container { padding: 24px 16px; } }
+
+/* ── COMPONENTS ───────────────────────────────────── */
+.med-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+.med-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-radius: var(--radius);
+  padding: 40px;
+  color: white;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner::after {
+  content: ""; position: absolute; top: -20%; right: -10%;
+  width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%;
+}
+
+.empty-state { text-align: center; padding: 60px 20px; }
+.adherence-score { font-family: var(--font-display); font-weight: 700; color: var(--accent); }
+
+/* ── SCROLLBAR ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* ── ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeInUp 0.4s ease forwards; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── DARK MODE: TAILWIND OVERRIDES ────────────────── */
+[data-theme="dark"] .bg-white { background: var(--bg-card) !important; }
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .bg-gray-100 { background: var(--bg-card-2) !important; }
+[data-theme="dark"] .hover\:bg-gray-100:hover { background: var(--bg-hover) !important; }
+[data-theme="dark"] .text-gray-900 { color: var(--text) !important; }
+[data-theme="dark"] .text-gray-700,
+[data-theme="dark"] .text-gray-800 { color: var(--text-2) !important; }
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-gray-600 { color: var(--text-3) !important; }
+[data-theme="dark"] .border-gray-100,
+[data-theme="dark"] .border-gray-200 { border-color: var(--border) !important; }
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: var(--bg-card-2) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder { color: var(--text-3) !important; }
+[data-theme="dark"] option { background: var(--bg-card-2); color: var(--text); }
+[data-theme="dark"] .med-card { background: var(--bg-card) !important; border-color: var(--border) !important; }
