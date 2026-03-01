@@ -16,9 +16,7 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
 
   return (
     <>
-      {/* FIX: Backdrop is now completely outside the scrolling container. 
-        This is locked to the viewport and will never scroll up to reveal a void.
-      */}
+      {/* 1. FIXED BACKDROP (Outside the scroll container so it never moves) */}
       <div 
         onClick={onClose}
         style={{
@@ -27,12 +25,13 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
           background: 'rgba(0,0,0,0.62)',
           backdropFilter: 'blur(5px)',
           WebkitBackdropFilter: 'blur(5px)',
-          zIndex: 9998, // Placed right below the modal content
+          zIndex: 9998, 
         }} 
       />
 
-      {/* Scrollable content area — clicks on empty space close modal */}
+      {/* 2. SCROLLABLE CONTAINER (Only this part scrolls) */}
       <div
+        onClick={e => { if (e.target === e.currentTarget) onClose() }}
         style={{
           position: 'fixed',
           inset: 0,
@@ -43,7 +42,6 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
         }}
       >
         <div
-          onClick={e => { if (e.target === e.currentTarget) onClose() }}
           style={{
             minHeight: '100%',
             display: 'flex',
@@ -64,7 +62,6 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
               maxWidth: maxWidths[size],
               boxShadow: '0 24px 80px rgba(0,0,0,0.5)',
               animation: 'modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-              // No maxHeight, no overflow — card grows with content
             }}
           >
             {/* Header */}
