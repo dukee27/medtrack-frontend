@@ -41,8 +41,8 @@ export default function Modal({ open, onClose, title, size = 'md', children }) {
           boxSizing: 'border-box',
         }}
       >
-        {/* Centering wrapper: justify center only, NO minHeight/height so blank space never appears */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {/* Centering wrapper */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
 
           {/* Modal card */}
           <div

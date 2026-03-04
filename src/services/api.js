@@ -86,9 +86,15 @@ export const getSchedule = (id) => api.get(`/schedule/${id}`)
 export const createSchedule = (data) => api.post('/schedule', data)
 export const updateSchedule = (id, data) => api.patch(`/schedule/${id}`, data)
 
+// ─── Schedules — Delete ───────────────────────────────
+export const deleteSchedule = (id, reason = '') =>
+  api.delete(`/schedule/${id}?reason=${encodeURIComponent(reason)}`)
+
 // ─── Intake Times ─────────────────────────────────────
-export const createIntakeTime = (data) => api.post('/intake-times', data)
-export const updateIntakeTime = (id, data) => api.put(`/intake-times/${id}`, data)
+export const createIntakeTime = (data) => api.post('/intake-time', data)
+export const updateIntakeTime = (id, data) => api.patch(`/intake-time/${id}`, data)
+export const deleteIntakeTime = (id, reason = '') =>
+  api.delete(`/intake-time/${id}?reason=${encodeURIComponent(reason)}`)
 
 // ─── Dose Logging (Take Dose) ─────────────────────────
 // POST /api/v1/medication/{id}/log — log a dose taken now, reduces quantity
