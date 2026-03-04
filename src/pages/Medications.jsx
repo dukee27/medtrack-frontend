@@ -7,7 +7,7 @@ import Modal from '../components/Modal';
 import toast from 'react-hot-toast';
 import { usePatient } from '../context/PatientContext';
 
-const MED_TYPES = ['PILL', 'CAPSULE', 'LIQUID', 'INJECTION', 'TOPICAL', 'INHALER', 'PATCH', 'OTHER'];
+const MED_TYPES = ['PILL', 'TABLET', 'CAPSULE', 'LIQUID', 'SYRUP', 'INJECTION', 'TOPICAL', 'INHALER', 'PATCH', 'DROPS', 'POWDER', 'OTHER'];
 
 const EMPTY_FORM = {
   name: '', dosage: '', type: 'PILL', quantity: '',
@@ -15,7 +15,6 @@ const EMPTY_FORM = {
   startDate: '', endDate: '', expiryDate: ''
 };
 
-// ─── MedForm is OUTSIDE Medications to prevent re-mounting on every keystroke ───
 function MedForm({ formData, setFormData, onSubmit, onCancel, isSubmitting, submitLabel }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -123,7 +122,7 @@ function MedForm({ formData, setFormData, onSubmit, onCancel, isSubmitting, subm
         <div>
           <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--text-2)', marginBottom: 6 }}>Quantity *</label>
           <input
-            type="number" required min="0" value={formData.quantity}
+            type="number" required min="1" value={formData.quantity}
             onChange={e => setFormData(prev => ({ ...prev, quantity: e.target.value }))}
             style={inputStyle} placeholder="e.g. 30"
           />
