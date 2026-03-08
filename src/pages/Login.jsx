@@ -37,7 +37,7 @@ export default function Login() {
     e.preventDefault();
     // Replace these with an actual user in your live database!
     const demoEmail = "demo@medtracker.com"; 
-    const demoPassword = "demo123";
+    const demoPassword = "DemoUser123@!";
     
     const result = await login(demoEmail, demoPassword);
     if (result.success) {
