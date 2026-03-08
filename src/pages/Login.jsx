@@ -32,6 +32,22 @@ export default function Login() {
     }
   }
 
+  // --- UPDATED DEMO LOGIN FUNCTION ---
+  const handleDemoLogin = async (e) => {
+    e.preventDefault();
+    // Replace these with an actual user in your live database!
+    const demoEmail = "demo@medtracker.com"; 
+    const demoPassword = "demo123";
+    
+    const result = await login(demoEmail, demoPassword);
+    if (result.success) {
+      toast.success('Logged in as Demo User!');
+      navigate('/dashboard');
+    } else {
+      toast.error(result.message || 'Failed to log in demo account');
+    }
+  };
+
   const panelBg    = isDark ? 'linear-gradient(160deg, #162a1f 0%, #0d1f15 100%)' : 'linear-gradient(160deg, #eef7f1 0%, #ddf0e5 100%)'
   const headColor  = isDark ? '#ddf0e5' : '#0d2818'
   const subColor   = isDark ? 'rgba(200,235,215,0.6)' : 'rgba(13,40,24,0.55)'
@@ -189,15 +205,29 @@ export default function Login() {
               </div>
             </div>
 
-            <button
-              type="submit" disabled={loading}
-              style={{ padding: '14px', borderRadius: 10, background: 'var(--accent)', color: '#fff', fontWeight: 700, fontSize: 15, border: 'none', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.8 : 1, transition: 'filter 0.15s, transform 0.1s' }}
-              onMouseEnter={e => { if (!loading) { e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.transform = 'translateY(-1px)' }}}
-              onMouseLeave={e => { e.currentTarget.style.filter = ''; e.currentTarget.style.transform = '' }}
-            >
-              {loading && <span style={{ width: 15, height: 15, border: '2px solid rgba(255,255,255,0.35)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block', flexShrink: 0 }} />}
-              {loading ? 'Signing in…' : 'Sign In'}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {/* Main Submit Button */}
+              <button
+                type="submit" disabled={loading}
+                style={{ padding: '14px', borderRadius: 10, background: 'var(--accent)', color: '#fff', fontWeight: 700, fontSize: 15, border: 'none', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.8 : 1, transition: 'filter 0.15s, transform 0.1s' }}
+                onMouseEnter={e => { if (!loading) { e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.transform = 'translateY(-1px)' }}}
+                onMouseLeave={e => { e.currentTarget.style.filter = ''; e.currentTarget.style.transform = '' }}
+              >
+                {loading && <span style={{ width: 15, height: 15, border: '2px solid rgba(255,255,255,0.35)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite', display: 'inline-block', flexShrink: 0 }} />}
+                {loading ? 'Signing in…' : 'Sign In'}
+              </button>
+
+              {/* NEW: Try Live Demo Button */}
+              <button 
+                type="button" 
+                onClick={handleDemoLogin}
+                disabled={loading}
+                className="w-full bg-transparent text-blue-600 border border-blue-600 hover:bg-blue-50 font-medium rounded-lg text-sm px-5 py-3 text-center transition-colors"
+                style={{ borderRadius: 10, fontSize: 15, padding: '13px' }}
+              >
+                Try Live Demo
+              </button>
+            </div>
           </form>
 
           {/* Divider */}
