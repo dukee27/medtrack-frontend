@@ -32,10 +32,8 @@ export default function Login() {
     }
   }
 
-  // --- UPDATED DEMO LOGIN FUNCTION ---
   const handleDemoLogin = async (e) => {
     e.preventDefault();
-    // Replace these with an actual user in your live database!
     const demoEmail = "demo12@medtracker.com"; 
     const demoPassword = "DemoUser123@!";
     
